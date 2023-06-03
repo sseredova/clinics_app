@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-4">
+          
+         <div class="table-responsive">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td><strong>Name:</strong></td>
+                  <td><%= @department.name %></td>
+                </tr>
+                 <tr>
+                  <td><strong>Clinic:</strong></td>
+                  <td><%= @department.clinic.name %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <%= link_to 'New Department', new_department_path, class: 'btn btn-primary', style: 'color:white;' %>
+          
+        </div>
+        
+        <div class="col-md-7 col-md-offset-1">
+          <!--<h1 class="department_name"><%= @department.name %></h1>-->
+  
+          <% if @department.doctors.blank? %>
+            <h3>No doctors added.</h3>
+            <%= link_to "Add doctor", new_doctor_path(@department), class: 'btn btn-primary', style: 'color:white;' %>
+          <% else %>
+            <% @department.doctors.each do |doctors| %>
+              <div class="doctors">
+                <p><%= link_to doctor.name, doctor %></p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <%= link_to 'Edit', edit_department_path(@department) %> |
+    <%= link_to 'Back', departments_path %>
+  </div>
+  
+</div>  

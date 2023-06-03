@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        
+        <p>
+          <% if @clinic.image.attached? %>
+            <%= image_tag (@clinic.image), style: "width:500px;height:500px;object-fit:cover"%>
+          <% else %>
+            <p>No image available</p>
+          <% end %>
+        </p>
+        
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><strong>Name:</strong></td>
+                <td><%= @clinic.name %></td>
+              </tr>
+              <tr>
+                <td><strong>Address:</strong></td>
+                <td><%= @clinic.address %></td>
+              </tr>
+              <tr>
+                <td><strong>Category:</strong></td>
+                <td><%= @clinic.category %></td>
+              </tr>
+              <tr>
+                <td><strong>Rating:</strong></td>
+                <td><%= @clinic.rating %></td>
+              </tr>
+              <tr>
+                <td><strong>Year:</strong></td>
+                <td><%= @clinic.year %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+      
+      <div class="col-md-7 col-md-offset-1">
+        <h1 class="clinic_name"><%= @clinic.name %></h1>
+
+        <% if @clinic.departments.blank? %>
+          <h3>No departments added.</h3>
+          <%= link_to "Add department", new_department_path(@clinic), class: "btn btn-danger", style: 'color:white;text-decoration:none' %>
+        <% else %>
+          <% @clinic.departments.each do |department| %>
+            <div class="departments">
+              <p><%= link_to department.name, department %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= link_to 'Edit', edit_clinic_path(@clinic) %> |
+<%= link_to 'Delete', clinic_path(@clinic), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', clinics_path %> |
+<%= link_to "Donwload pdf", download_pdf_path(@clinic.id.to_i), target: "_blank" %>

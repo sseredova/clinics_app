@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default" role="navigation" style="padding-top:20px;padding-bottom:20px;background:white">
+  <div class="container">
+    <div class="navbar-header"> 
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Clinics", root_path, class: "navbar-brand" %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="">
+      <ul class="nav navbar-nav"> 
+        <% if user_signed_in? %>
+          <li><%= link_to "Profile", edit_user_registration_path %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path  %></li>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+        <% end %>
+      </ul>
+      <div style="display:flex;align-items:center;gap:20px">
+      <%= form_tag root_path, :method => :get, :class => "navbar-form navbar-right", :style => "flex:1" do %>
+        <p style="display:flex;gap:20px;margin:0">
+          <%= text_field_tag :search, params[:search], class: "form-control", style: "width:100%" %>
+          <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+          
+        </p>
+      <% end %>
+      <% if user_signed_in? %>
+      <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+      <% end %>
+      </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
